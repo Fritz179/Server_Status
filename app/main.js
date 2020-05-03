@@ -1,4 +1,4 @@
-const sendEmail = require('./setup/sendEmail');
+const sendMail = require('./setup/sendMail');
 
 const message = {
     from: {
