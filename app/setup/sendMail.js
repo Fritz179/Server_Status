@@ -10,4 +10,4 @@ let transport = nodemailer.createTransport({
     }
 });
 
-module.exports = transport.sendMail
+module.exports = (...args) => transport.sendMail(...args)
