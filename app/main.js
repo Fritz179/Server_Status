@@ -1,25 +1,20 @@
-require('dotenv').config();
-
-const nodemailer = require('nodemailer');
-
-let transport = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    auth: {
-       user: process.env.USER,
-       pass: process.env.PW
-    }
-});
+const sendEmail = require('./setup/sendEmail');
 
 const message = {
-    from: process.env.USER,
+    from: {
+      name: 'Server down!',
+      address: process.env.USERNAME
+    },
     to: process.env.TO,
-    subject: 'TEST',
-    text: 'TEST TEXT'
-};
+    subject: `${process.env.SERVER || 'Server'} has a problem!!`,
+    text: 'TEST',
+    priority: 'high'
+}
 
-console.log(message);
-transport.sendMail(message, (err, info) => {
+sendMail(message, (err, info) => {
     console.assert(!err, err)
-    console.log(info);
+
+    if (!err) {
+      console.log('Message sent!');
+    }
 });
